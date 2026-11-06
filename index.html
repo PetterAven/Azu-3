@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maestra Azu, una pregunta</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffd3e2;--card:#fff6f9;--ink:#5a1230;--main:#e8386d;--soft:#ffd0df;--accent:#ff7aa8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2b0f1c;--card:#3d1628;--ink:#ffe3ec;--main:#ff5c8a;--soft:#5e2540;--accent:#ff9ab8}}
+:root[data-theme="dark"]{--bg:#2b0f1c;--card:#3d1628;--ink:#ffe3ec;--main:#ff5c8a;--soft:#5e2540;--accent:#ff9ab8}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(circle at 15% 12%,color-mix(in srgb,var(--main) 40%,transparent),transparent 45%),radial-gradient(circle at 88% 88%,color-mix(in srgb,var(--accent) 40%,transparent),transparent 45%),var(--bg);color:var(--ink);font-family:"Baloo 2","Nunito","Trebuchet MS",system-ui,sans-serif;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.card{background:var(--card);border-radius:36px;padding:34px 26px 30px;width:min(88vw,380px);text-align:center;border:2px solid color-mix(in srgb,var(--accent) 55%,transparent);box-shadow:0 22px 60px color-mix(in srgb,var(--main) 45%,transparent),0 0 0 8px color-mix(in srgb,var(--main) 12%,transparent);animation:pop .6s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.emoji{font-size:64px;line-height:1;display:inline-block;animation:bal 2s ease-in-out infinite}
+@keyframes bal{0%,100%{transform:scale(1)}20%{transform:scale(1.18)}40%{transform:scale(1)}60%{transform:scale(1.12)}}
+h1{font-family:"Pacifico","Brush Script MT",cursive;font-size:30px;line-height:1.35;margin:14px 0 6px;font-weight:400;padding:4px 0;background:linear-gradient(90deg,var(--main),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:0 0 24px;font-size:15px;opacity:.75}
+.btns{display:flex;gap:14px;justify-content:center;align-items:center;min-height:56px;margin-bottom:calc((var(--s,1) - 1) * 30px);transition:margin .3s}
+button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:999px;padding:13px 28px;cursor:pointer;touch-action:manipulation}
+#si{background:linear-gradient(135deg,var(--main),var(--accent));color:#fff;box-shadow:0 6px 0 color-mix(in srgb,var(--main) 60%,#000),0 10px 24px color-mix(in srgb,var(--accent) 50%,transparent);transform:scale(var(--s,1));transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+#si:active{transform:translateY(3px) scale(var(--s,1));box-shadow:0 2px 0 color-mix(in srgb,var(--main) 60%,#000)}
+#no{background:var(--soft);color:var(--ink);transform:scale(var(--n,1));transition:left .25s cubic-bezier(.3,1.6,.5,1),top .25s cubic-bezier(.3,1.6,.5,1),transform .3s}
+#msg{min-height:22px;margin-top:18px;font-size:14px;font-weight:700;color:var(--accent)}
+.win{display:none}
+.gracias{font-family:"Pacifico","Brush Script MT",cursive;font-size:28px;line-height:1.4;margin-top:-6px;background:linear-gradient(90deg,var(--main),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;animation:pop .7s .3s cubic-bezier(.3,1.5,.5,1) both}
+.bg span{position:fixed;bottom:-50px;animation:up 10s linear infinite;opacity:.55;pointer-events:none}
+.on .ask{display:none}.on .win{display:block}
+.heart{position:fixed;bottom:-30px;pointer-events:none;animation:up 3s linear forwards}
+@keyframes up{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.emoji{animation:none}.heart,.bg{display:none}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><span style="left:8%;font-size:26px;animation-delay:0s">💗</span><span style="left:24%;font-size:18px;animation-delay:3s">💕</span><span style="left:42%;font-size:30px;animation-delay:6s">🌹</span><span style="left:60%;font-size:20px;animation-delay:1.5s">💘</span><span style="left:78%;font-size:28px;animation-delay:4.5s">💖</span><span style="left:92%;font-size:18px;animation-delay:7.5s">💋</span></div>
+<div class="card">
+  <div class="ask">
+    <div class="emoji">💌</div>
+    <h1>Maestra Azu, ¿me perdona?</h1>
+    <p>Con esa sonrisa nadie se enoja por mucho tiempo 😉</p>
+    <div class="btns">
+      <button id="si">Sí, lo perdono 💘</button>
+      <button id="no">No</button>
+    </div>
+    <div id="msg" aria-live="polite"></div>
+  </div>
+  <div class="win">
+    <div class="emoji">😍</div>
+    <h1>Sabía que no se me iba a resistir</h1>
+    <p>Me alegró el día, maestra Azu. Ahora sí, ¿cuándo me cobra el perdón con un cafecito? ☕💕</p>
+    <div class="gracias">Gracias, hermosísima 💖</div>
+  </div>
+</div>
+<script>
+(function(){
+  var no=document.getElementById('no'),si=document.getElementById('si'),msg=document.getElementById('msg');
+  var frases=['Uy, ese botón me tiene miedo 😏','Con esa mirada nadie dice que no','Casi me alcanza, maestra 💘','Mejor dele al otro botón 😉','No se resista 💕','Ese botón es tímido, yo no tanto','Me está rompiendo el corazón 💔','Ya perdóneme y le invito un café ☕'];
+  var n=0,placed=false;
+  function huir(e){
+    if(e){e.preventDefault();}
+    var w=window.innerWidth,h=window.innerHeight,bw=no.offsetWidth,bh=no.offsetHeight,m=12;
+    if(!placed){
+      var r=no.getBoundingClientRect();
+      no.style.position='fixed';no.style.left=r.left+'px';no.style.top=r.top+'px';
+      placed=true;
+    }
+    var cur=no.getBoundingClientRect(),x,y,t=0;
+    do{
+      x=m+Math.random()*(w-bw-2*m);
+      y=m+Math.random()*(h-bh-2*m);
+      t++;
+    }while(t<30&&Math.hypot(x-cur.left,y-cur.top)<120);
+    no.style.left=x+'px';no.style.top=y+'px';
+    msg.textContent=frases[n%frases.length];n++;
+    var root=document.documentElement;
+    root.style.setProperty('--n',Math.max(.2,1-n*.12));
+    root.style.setProperty('--s',Math.min(2.2,1+n*.2));
+  }
+  no.addEventListener('mouseenter',huir);
+  no.addEventListener('touchstart',huir,{passive:false});
+  no.addEventListener('click',huir);
+  no.addEventListener('focus',huir);
+  si.addEventListener('click',function(){
+    document.body.classList.add('on');
+    var e=['💘','💖','💋','🌹','💕'];
+    for(var i=0;i<28;i++){
+      (function(i){setTimeout(function(){
+        var s=document.createElement('span');s.className='heart';
+        s.textContent=e[Math.floor(Math.random()*e.length)];
+        s.style.left=Math.random()*100+'vw';
+        s.style.fontSize=(18+Math.random()*28)+'px';
+        document.body.appendChild(s);
+        setTimeout(function(){s.remove()},3200);
+      },i*90)})(i);
+    }
+  });
+})();
+</script>
+</body>
+</html>
